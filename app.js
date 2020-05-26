@@ -4,11 +4,14 @@ const app = express();
 const morgan = require('morgan');
 const mysql = require('mysql');
 const bodyParser = require ('body-parser');
+const cors = require('cors');
 
 // Required usings (middleware)
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan('short'));
 app.use(express.static('./public'));
+app.use(cors());
+
 
 // Connection configuration
 function MySQLConnection () {
@@ -110,6 +113,8 @@ app.post('/post_user',(req, res) => {
 //         res.end()
 //     });
 // });
+
+
 
 // Delete a user by username // example - http://localhost:3333/delete_user/
 // wont work in a browser?
