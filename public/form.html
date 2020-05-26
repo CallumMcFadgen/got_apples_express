@@ -1,0 +1,55 @@
+<html>
+    <body>
+
+        <div>
+            <h1>Add a new user</h1>
+            <hr />
+            <form action="/post_user" method ="POST">
+                <ul>
+                <input placeholder="First name" name="create_first_name"/><br />
+                <br />
+                <input placeholder="Last name" name="create_last_name"/><br />
+                <br />
+                <input placeholder="Username" name="create_username"/><br />
+                <br />
+                <input placeholder="Password" name="create_password" /><br />
+                <br />
+                <input placeholder="Phone number" name="create_phone_number" /><br />
+                <br />
+                <input placeholder="Email address" name="create_email_address" /><br />
+                <br />          
+                <input placeholder="Address Line 1" name="create_address_line_1"/><br />
+                <br />
+                <input placeholder="Address Line 2" name="create_address_line_2"/><br />
+                <br />
+                <input placeholder="Region" name="create_region"/><br />
+                <br />
+                <input placeholder="City" name ="create_city"/><br />
+                <br />
+                <input placeholder="ZIP code" name="create_zip_code"/><br />
+                <br />
+                <input placeholder="Member status (T/F)" name="create_member_status"/><br />
+                <br />
+                <button>Add</button>
+            </ul>
+            </form>
+        </div>
+        <br />
+        <br />
+        <br />        
+        <div>
+            <h1>Delete a user</h1>
+            <hr />
+            <form action="/delete_user" method ="DELETE">
+                <ul>
+                <br />
+                <input placeholder="Username" name="delete_username"/><br />
+                <br />
+                <button>Delete</button>
+            </ul>
+            </form>
+        </div>
+
+
+    </body>
+</html>
