@@ -1,4 +1,4 @@
-# WEB701 Milestone 2 Express API service
+# WEB701 Milestone 2 Express server prototype
 
 ### Overview
 This server prototype is an Express restful API service that is intended to be used in conjunction with front-end client prototypes for web application functionality testing for the Got Apples! website.
@@ -24,7 +24,9 @@ Open the in editor terminal and enter
 nodemon app.js
 ```
 to start a copy running on a development server, once the application has compiled , enter the url http://localhost:3333 to open the application in a browser
-
+<br />
+A RESTful Client like Insomnia or Postman would be useful for running tests on the API's
+<br />
 http://localhost:3333 start message
 <br />
 http://localhost:3333/get_users to get all users
