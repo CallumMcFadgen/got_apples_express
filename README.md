@@ -25,7 +25,9 @@ nodemon app.js
 ```
 to start a copy running on a development server, once the application has compiled , enter the url http://localhost:3333 to open the application in a browser
 <br />
+<br />
 A RESTful Client like Insomnia or Postman would be useful for running tests on the API's
+<br />
 <br />
 http://localhost:3333 start message
 <br />
