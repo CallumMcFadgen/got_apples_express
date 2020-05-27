@@ -26,9 +26,13 @@ nodemon app.js
 to start a copy running on a development server, once the application has compiled , enter the url http://localhost:3333 to open the application in a browser
 
 http://localhost:3333 start message
+<br />
 http://localhost:3333/get_users to get all users
+<br />
 http://localhost:3333/get_user/username to get a specific user
+<br />
 http://localhost:333/delete_user/username to delete a specific user
-
+<br />
+<br />
 http://localhost:3333/form.html to open an editing form for creating or editing a user
 
