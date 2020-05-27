@@ -41,5 +41,5 @@ http://localhost:3333/get_user/username to get a specific user
 http://localhost:333/delete_user/username to delete a specific user
 <br />
 <br />
-http://localhost:3333/form.html to open an editing form for creating or editing a user
+http://localhost:3333/form.html to open an editing form for creating a user
 
