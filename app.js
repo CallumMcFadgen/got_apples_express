@@ -35,6 +35,8 @@ app.get("/", (req, res) => {
 });
 
 
+
+
 // REST API ROUTES //////////////////////////////////////////////////////////////////
 
 
@@ -52,7 +54,7 @@ app.get('/get_user/:username', (req, res) => {
             res.sendStatus(500)
             return
         };
-        console.log(rows)
+        console.log("Get user " + userName + " succeded")
         res.json(rows)
     });
 });
@@ -70,11 +72,10 @@ app.get('/get_users', (req, res) => {
             res.sendStatus(500)
             return
         };
-        console.log(rows);
+        console.log("Get users succeded")
         res.json(rows);
     });
 });
-
 
 
 // POST A NEW USER CALLED BOB BELCHER TO THE USER TABLE
@@ -130,7 +131,6 @@ app.patch('/patch_user/:username',(req, res) => {
 });
 
 
-
 // DELETE A SPECIFIC USER FROM THE USER TABLE BY USERNAME
 // EXAMPLE - http://localhost:3333/delete_user/Bobby
 
@@ -149,6 +149,75 @@ app.delete('/delete_user/:username', (req, res) => {
         res.end()
     });
 });
+
+
+// POST A NEW AUCTION TO THE AUCTION TABLE
+// EXAMPLE ROUTE - http://localhost:3333/post_auction
+
+app.post('/post_auction',(req, res) => { 
+
+    const title = "Title for test auction"
+    const weight = 3
+    const startDate = "2020-05-04 12:30:00"
+    const endDate = "2020-05-11 12:30:00"
+    const description = "Description for test auction."
+    const reserveAmount =  4
+    const buyNow = 1
+    const buyNowAmount =  4.50
+    const delivery = 1
+    const deliveryAmount = .50
+    const sold = 0
+    const userName = "Kal"
+    const VarietyName = "Blenheim Orange"
+
+    const queryString = "INSERT INTO auction (title, weight, start_date, end_date, `description`, reserve_amount, buy_now, buy_now_amount, delivery, delivery_amount, sold, variety_name, user_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    MySQLConnection().query(queryString, [title, weight, startDate, endDate, description, reserveAmount, buyNow, buyNowAmount, delivery, deliveryAmount, sold, VarietyName, userName], (err, results, fields) => {
+        if (err) {
+            console.log("Post auction failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Post auction succeded")
+        res.end()
+    });
+});
+
+
+// CHECK USER CREDENTIALS FOR LOGIN USING USERNAME AND PASSWORD
+// EXAMPLE SUCCESFUL ROUTE - http://localhost:3333/login_authentication/Kal/P@ssword1
+// EXAMPLE UNSUCCESFUL ROUTE - http://localhost:3333/login_authentication/Kal/P@ssword
+// EXAMPLE UNSUCCESFUL ROUTE - http://localhost:3333/login_authentication/Ka/P@ssword1
+
+app.get('/login_authentication/:id/:password',(req, res) => { 
+
+    const userName = req.params.id
+    const password = req.params.password
+
+    const queryString = "CALL UserLogin(?, ?);"
+    MySQLConnection().query(queryString, [userName, password], (err, results) => {
+        if (err) {
+            console.log("Authentication request for " + userName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+
+        console.log("Authentication request for " + userName + " succesful")
+        res.json(results[0])
+
+        if (results[0] = "LOGIN SUCCEDED") {
+            console.log ("Succesful login for user: " + userName);
+        }
+        else if (results[0] = "LOGIN FAILED"){
+            console.log ("Unsuccesful login for user: " + userName);
+        }
+
+        res.end()
+    });
+});
+
+
+
+// TESTING ////////////////////////////////////////////////////////////////////////////////////////////
 
 
 // POST A NEW USER CALLED BOB BELCHER TO THE USER TABLE
@@ -181,38 +250,56 @@ app.delete('/delete_user/:username', (req, res) => {
 //     });
 // });
 
-//////////////////////////////////////////////////////////////////////////////////////////////
 
 
+// // working specific user api
+// app.get('/orchard/:orchard_name', (req, res) => {
+
+//     const orchard_name = req.params.orchard_name
+
+//     const queryString = "SELECT * FROM orchard WHERE orchard_name = ?"
+//     MySQLConnection().query(queryString, [orchard_name], (err, rows, fields) => {
+//         console.log(rows);
+//         res.json(rows);
+//     });
+// });
 
 
+// // working all orchards api
+// app.get('/orchards', (req, res) => {
+
+//     const queryString = "SELECT * FROM orchard"
+//     MySQLConnection().query(queryString, (err, rows, fields) => {
+//         console.log(rows);
+//         res.json(rows);
+//     });
+
+// });
 
 
+// // Updating a user using a MySQL stored procedure
+// // http://localhost:3333/patch_user_procedure/Kal/Test2
+// app.patch('/patch_user_procedure/:id/:param',(req, res) => { 
 
+//     const userName = req.params.id
+//     const firstName = req.params.param
 
-// working specific user api
-app.get('/orchard/:orchard_name', (req, res) => {
+//     const queryString = "CALL UpdateFirstName(?, ?);"
+//     MySQLConnection().query(queryString, [userName, firstName], (err, results) => {
+//         if (err) {
+//             console.log("Patch user " + userName + " failed: " + err)
+//             res.sendStatus(500)
+//             return
+//         };
+//         console.log("Patch user succeded: user " + userName + " updated")
+//         res.json(results[0])
+//         if (results[0] = "Name changed") {
+//             console.log ("Test name changed Test")
+//         }
+//         res.end()
+//     });
+// });
 
-    const orchard_name = req.params.orchard_name
-
-    const queryString = "SELECT * FROM orchard WHERE orchard_name = ?"
-    MySQLConnection().query(queryString, [orchard_name], (err, rows, fields) => {
-        console.log(rows);
-        res.json(rows);
-    });
-});
-
-
-// working all orchards api
-app.get('/orchards', (req, res) => {
-
-    const queryString = "SELECT * FROM orchard"
-    MySQLConnection().query(queryString, (err, rows, fields) => {
-        console.log(rows);
-        res.json(rows);
-    });
-
-});
 
 
 
