@@ -9,26 +9,45 @@ This server prototype is an Express restful API service that is intended to be u
 ### Current features
 <ul>
   <li>Connected to MySQL database</li>
-  <li>Get all users API</li>
-  <li>Get a user API</li>
-  <li>Post a user API</li>
-  <li>Delete a user API</li>
+  <li>Get all users API to return all users data</li>
+  <li>Get user data API to return a single users data</li>
+  <li>Post a user API to add a new user to the table</li>
+  <li>Patch a user API to update an existing user</li>
+  <li>Delete a user API to delete a specific user</li>
+  <li>Post an auction to add a new auction to the table</li>
+  <li>Get an authentication response a authentication request user</li>
 </ul>
 
 ### Installation
-Simply fork and clone a copy of this repo to your local device, open the folder in a editor with a terminal, I recommend VS code, and enter the command line 
+Simply fork and clone a copy of this repo to your local device.
 
 Open the database script in MySQL workbench and run it to create, use, and populate the database.
-
-Edit the MySQLConnection function to match your local MySQL details in app.js
-
-Open the in editor terminal and enter 
+<br />
+<br />
+Open the prototypes folder in a editor with a terminal, I recommend VS code.
+<br />
+<br />
+Edit the MySQLConnection function to match your local MySQL details in the app.js file
+<br />
+<br />
+Open terminal and enter the following command to start the prototype on a development server
 ```
 nodemon app.js
 ```
-to start a copy running on a development server, once the application has compiled , enter the url http://localhost:3333 to open the application in a browser where a messgae should be visible.
+Once the application has compiled , open a browser and enter the following URL 
+```
+http://localhost:3333
+```
+This should display a message that the server is running.
 <br />
 <br />
+Now open a rest Client like Postman or Insomnia
+<br />
+<br />
+Enter the following URL and set the method to GET, this show a return of all the users data in a JSON array.
+```
+http://localhost:3333/get_users
+```
 A RESTful Client like Insomnia or Postman would be useful for running tests on the API's
 <br />
 <br />
