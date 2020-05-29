@@ -19,7 +19,7 @@ This server prototype is an Express restful API service that is intended to be u
 </ul>
 
 ### Installation
-Simply fork and clone a copy of this repo to your local device.
+Simply fork and clone a copy of this repo to your local device and ensure that MySQL Workbench and a REST client (Postman, Insomnia) are installed.
 
 Open the database script in MySQL workbench and run it to create, use, and populate the database.
 <br />
@@ -34,31 +34,34 @@ Open terminal and enter the following command to start the prototype on a develo
 ```
 nodemon app.js
 ```
-Once the application has compiled , open a browser and enter the following URL 
+Once the application has compiled, open a browser and enter the following URL 
 ```
 http://localhost:3333
 ```
 This should display a message that the server is running.
 <br />
 <br />
-Now open a rest Client like Postman or Insomnia
+Now open a rest Client like Postman or Insomnia and open the MySQL Workbench
 <br />
 <br />
-Enter the following URL and set the method to GET, this show a return of all the users data in a JSON array.
+In the Rest client, enter the following URL as a GET method to show a return of all the users data in a JSON array.  This can be verified by checking the user records in the database.
 ```
 http://localhost:3333/get_users
 ```
-A RESTful Client like Insomnia or Postman would be useful for running tests on the API's
-<br />
-<br />
-http://localhost:3333 start message
-<br />
-http://localhost:3333/get_users to get all users
-<br />
-http://localhost:3333/get_user/username to get a specific user
-<br />
-http://localhost:333/delete_user/username to delete a specific user
-<br />
-<br />
-http://localhost:3333/form.html to open an editing form for creating a user
+Enter the following URL as a GET method to show a return of a single specified users data, in this case me!  Again this can be verified by checking the user records
+```
+http://localhost:3333/get_user/Kal
+```
+To add a new user, enter the following URL as a POST method, there will be no return but a check of the refreshed user records will show the addition of a new user Bob Belcher.
+```
+http://localhost:3333/post_user
+```
+To then edit the new users name, eneter the following URL as a PATCH method, there will be no return but a check of the refreshed user records will show that Bob Belcher has become Burger Master.
+```
+http://localhost:3333/patch_user/Bobby
+```
+To remove a user record, enter the following URL as a DELETE method, there will be no return but a check of the refreshed user records will show that Burger Master has been deleted.
+```
+http://localhost:3333/delete_user/Bobby
+```
 
