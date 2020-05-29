@@ -21,7 +21,7 @@ This server prototype is an Express restful API service that is intended to be u
 ### Installation
 Simply fork and clone a copy of this repo to your local device and ensure that MySQL Workbench and a REST client (Postman, Insomnia) are installed.
 
-Open the database script in MySQL workbench and run it to create the database and populate it with dummy data, instructions are at the top of the script.
+Open the database script in MySQL workbench and run it to create the database and populate it with dummy dataas per the instructions at the top of the script.
 <br />
 <br />
 Open the Express prototypes folder in a editor with a terminal, such as VS Code.
