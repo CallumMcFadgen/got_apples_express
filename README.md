@@ -4,7 +4,7 @@
 This server prototype is an Express restful API service that is intended to be used in conjunction with front-end client prototypes for web application functionality testing for the Got Apples! website.
 <br />
 <br />
-<b>Note -</b> This prototype needs to be installed and running before testing the client prototypes as they need to call the APIs in this API service.
+<b>Note -</b> This prototype needs to be installed and running before testing the client prototypes as they will need to call the APIs in this API service.
 
 ### Current features
 <ul>
