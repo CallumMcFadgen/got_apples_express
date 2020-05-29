@@ -41,7 +41,7 @@ app.get("/", (req, res) => {
 
 
 // GET A SPECIFIC USER FROM THE USER TABLE BY USERNAME
-// EXAMPLE ROUTE - http://localhost:3333/get_user/Fitz
+// EXAMPLE ROUTE - http://localhost:3333/get_user/Kal
 
 app.get('/get_user/:username', (req, res) => {
 
@@ -184,11 +184,11 @@ app.post('/post_auction',(req, res) => {
 
 
 // CHECK USER CREDENTIALS FOR LOGIN USING USERNAME AND PASSWORD
-// EXAMPLE SUCCESFUL ROUTE - http://localhost:3333/login_authentication/Kal/P@ssword1
-// EXAMPLE UNSUCCESFUL ROUTE - http://localhost:3333/login_authentication/Kal/P@ssword
-// EXAMPLE UNSUCCESFUL ROUTE - http://localhost:3333/login_authentication/Ka/P@ssword1
+// EXAMPLE SUCCESFUL ROUTE - http://localhost:3333/get_login_auth/Kal/P@ssword1
+// EXAMPLE UNSUCCESFUL ROUTE - http://localhost:3333/get_login_auth/Kal/P@ssword
+// EXAMPLE UNSUCCESFUL ROUTE - http://localhost:3333/get_login_auth/Ka/P@ssword1
 
-app.get('/login_authentication/:id/:password',(req, res) => { 
+app.get('/get_login_auth/:id/:password',(req, res) => { 
 
     const userName = req.params.id
     const password = req.params.password
