@@ -10,7 +10,7 @@ This server prototype is an Express restful API service that is intended to be u
 <ul>
   <li>Connected to MySQL database</li>
   <li>GET all users API to return all users data</li>
-  <li>GET user data API to return a single users data</li>
+  <li>GET user API to return a single users data</li>
   <li>POST a user API to add a new user to the table</li>
   <li>PATCH a user API to update an existing user</li>
   <li>DELETE a user API to delete a specific user</li>
