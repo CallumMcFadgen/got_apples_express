@@ -15,7 +15,7 @@ This server prototype is an Express restful API service that is intended to be u
   <li>Patch a user API to update an existing user</li>
   <li>Delete a user API to delete a specific user</li>
   <li>Post an auction to add a new auction to the table</li>
-  <li>Get an authentication response a authentication request user</li>
+  <li>Get an authentication response to an authentication request</li>
 </ul>
 
 ### Installation
