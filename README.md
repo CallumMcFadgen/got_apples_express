@@ -66,6 +66,7 @@ http://localhost:3333/delete_user/Bobby
 ```
 These routes cover the full Create Read Update and Delete functionality required for the prototype.  There were also some use cases, create a new auction and authenticate user login process.
 <br />
+<br />
 To test creating a new auction enter the following URL as a POST method, there will be no return, but a check of the refreshed auction records will show the addition of a new auction Test Auction.
 ```
 http://localhost:3333/post_auction
