@@ -75,14 +75,14 @@ To test a user login, enter the following URL as a GET method, there will be a r
 <br />
 Successful login
 ```
-http://localhost:3333/post_auction/Kal/P@ssword1
+http://localhost:3333/get_login_auth/Kal/P@ssword1
 ```
 Incorrect username
 ```
-http://localhost:3333/post_auction/Kl/P@ssword1
+http://localhost:3333/get_login_auth/Kl/P@ssword1
 ```
 Incorrect password
 ```
-http://localhost:3333/post_auction/Kal/P@sswrd1
+http://localhost:3333/get_login_auth/Kal/P@ssord1
 ```
 If there are any issues with testing the Express prototype, please do not hesitate to contact me.
