@@ -9,46 +9,46 @@ This server prototype is an Express restful API service that is intended to be u
 ### Current features
 <ul>
   <li>Connected to MySQL database</li>
-  <li>Get all users API to return all users data</li>
-  <li>Get user data API to return a single users data</li>
-  <li>Post a user API to add a new user to the table</li>
-  <li>Patch a user API to update an existing user</li>
-  <li>Delete a user API to delete a specific user</li>
-  <li>Post an auction to add a new auction to the table</li>
-  <li>Get an authentication response to an authentication request</li>
+  <li>GET all users API to return all users data</li>
+  <li>GET user data API to return a single users data</li>
+  <li>POST a user API to add a new user to the table</li>
+  <li>PATCH a user API to update an existing user</li>
+  <li>DELETE a user API to delete a specific user</li>
+  <li>POST an auction to add a new auction to the table</li>
+  <li>GET an authentication response to an authentication request</li>
 </ul>
 
 ### Installation
 Simply fork and clone a copy of this repo to your local device and ensure that MySQL Workbench and a REST client (Postman, Insomnia) are installed.
 
-Open the database script in MySQL workbench and run it to create the database and populate it with dummy data.
+Open the database script in MySQL workbench and run it to create the database and populate it with dummy data, instructions are at the top of the script.
 <br />
 <br />
-Open the prototypes folder in a editor with a terminal, I recommend VS code.
+Open the Express prototypes folder in a editor with a terminal, such as VS Code.
 <br />
 <br />
-Edit the MySQLConnection function to match your local MySQL details in the app.js file
+Edit the MySQLConnection function in the prototypes App.js file to match your local MySQL details, such as password, user, etc.
 <br />
 <br />
-Open terminal and enter the following command to start the prototype on a development server
+Open a terminal and enter the following command to start the prototype on a development server.
 ```
 nodemon app.js
 ```
-Once the application has compiled, open a browser and enter the following URL 
+Once the application has compiled, open a browser and enter the following URL. 
 ```
 http://localhost:3333
 ```
 This should display a message that the server is running.
 <br />
 <br />
-Now open a REST Client like Postman or Insomnia as well as MySQL Workbench
+Now open a REST Client like Postman or Insomnia as well as MySQL Workbench.
 <br />
 <br />
 In the REST client, enter the following URL as a GET method to show a return of all the users data in a JSON array.  This can be verified by checking the user records in the database.
 ```
 http://localhost:3333/get_users
 ```
-Enter the following URL as a GET method to show a return of a single specified users data, in this case me!  Again this can be verified by checking the user records
+Enter the following URL as a GET method to show a return of a single specified users data, in this case me!  Again this can be verified by checking the user records.
 ```
 http://localhost:3333/get_user/Kal
 ```
