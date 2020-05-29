@@ -41,10 +41,10 @@ http://localhost:3333
 This should display a message that the server is running.
 <br />
 <br />
-Now open a rest Client like Postman or Insomnia and open the MySQL Workbench
+Now open a REST Client like Postman or Insomnia as well as MySQL Workbench
 <br />
 <br />
-In the Rest client, enter the following URL as a GET method to show a return of all the users data in a JSON array.  This can be verified by checking the user records in the database.
+In the REST client, enter the following URL as a GET method to show a return of all the users data in a JSON array.  This can be verified by checking the user records in the database.
 ```
 http://localhost:3333/get_users
 ```
@@ -52,16 +52,36 @@ Enter the following URL as a GET method to show a return of a single specified u
 ```
 http://localhost:3333/get_user/Kal
 ```
-To add a new user, enter the following URL as a POST method, there will be no return but a check of the refreshed user records will show the addition of a new user Bob Belcher.
+To add a new user, enter the following URL as a POST method, there will be no return, but a check of the refreshed user records will show the addition of a new user Bob Belcher.
 ```
 http://localhost:3333/post_user
 ```
-To then edit the new users name, eneter the following URL as a PATCH method, there will be no return but a check of the refreshed user records will show that Bob Belcher has become Burger Master.
+To then edit the new users name, enter the following URL as a PATCH method, there will be no return, but a check of the refreshed user records will show that Bob Belcher has become Burger Master.
 ```
 http://localhost:3333/patch_user/Bobby
 ```
-To remove a user record, enter the following URL as a DELETE method, there will be no return but a check of the refreshed user records will show that Burger Master has been deleted.
+To remove a user record, enter the following URL as a DELETE method, there will be no return, but a check of the refreshed user records will show that Burger Master has been deleted.
 ```
 http://localhost:3333/delete_user/Bobby
 ```
-
+These routes cover the full Create Read Update and Delete functionality required for the prototype.  There were also some use cases, create a new auction and authenticate user login process.
+<br />
+To test creating a new auction enter the following URL as a POST method, there will be no return, but a check of the refreshed auction records will show the addition of a new auction Test Auction.
+```
+http://localhost:3333/post_auction
+```
+To test a user login, enter the following URL as a GET method, there will be a return of LOGIN SUCCEDED or LOGIN FAILED.  Try different combinations of username and password appended to the URL to test the methods effectiveness as shown below.
+<br />
+Successful login
+```
+http://localhost:3333/post_auction/Kal/P@ssword1
+```
+Incorrect username
+```
+http://localhost:3333/post_auction/Kl/P@ssword1
+```
+Incorrect password
+```
+http://localhost:3333/post_auction/Kal/P@sswrd1
+```
+If there are any issues with testing the Express prototype, please do not hesitate to contact me.
