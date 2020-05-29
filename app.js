@@ -116,7 +116,7 @@ app.patch('/patch_user/:username',(req, res) => {
 
     const userName = req.params.username
     const firstName = "Burger"
-    const lastName = "King"
+    const lastName = "Master"
 
     const queryString = "UPDATE user SET first_name =?, last_name =? WHERE user_name =?"
     MySQLConnection().query(queryString, [firstName, lastName, userName], (err, results, fields) => {
@@ -156,7 +156,7 @@ app.delete('/delete_user/:username', (req, res) => {
 
 app.post('/post_auction',(req, res) => { 
 
-    const title = "Title for test auction"
+    const title = "Test Auction"
     const weight = 3
     const startDate = "2020-05-04 12:30:00"
     const endDate = "2020-05-11 12:30:00"
