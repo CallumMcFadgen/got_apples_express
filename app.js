@@ -216,6 +216,11 @@ app.get('/get_login_auth/:id/:password',(req, res) => {
 });
 
 
+// TO DO - BID ROUTE FOR CREATING/UPDATING A BID USING A MYSQL PROCEDURE
+
+
+
+
 
 // TESTING ////////////////////////////////////////////////////////////////////////////////////////////
 
