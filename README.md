@@ -4,6 +4,10 @@
 This server prototype is an Express restful API service that is intended to be used in conjunction with front-end client prototypes for web application functionality testing for the Got Apples! website.
 <br />
 <br />
+Click here to view the video walkthrough
+https://youtu.be/8ufu3DofQ9Q
+<br />
+<br />
 <b>Note -</b> This prototype needs to be installed and running before testing the client prototypes as they will need to call the APIs in this API service.
 
 ### Current features
@@ -19,9 +23,10 @@ This server prototype is an Express restful API service that is intended to be u
 </ul>
 
 ### Installation
+
 Simply fork and clone a copy of this repo to your local device and ensure that MySQL Workbench and a REST client (Postman, Insomnia) are installed.
 
-Open the database script in MySQL workbench and run it to create the database and populate it with dummy dataas per the instructions at the top of the script.
+Open the SQL file in the database_script folder and copy the contents into a query tab in MySQL workbench and run it to create the database and populate it with dummy data as per the instructions at the top of the script.
 <br />
 <br />
 Open the Express prototypes folder in a editor with a terminal, such as VS Code.
