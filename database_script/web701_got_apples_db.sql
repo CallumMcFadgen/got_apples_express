@@ -1,12 +1,11 @@
 -- CREATE DATABASE SCRIPT ------------------------------------------------
 
-
 -- INSTRUCTIONS
 -- Open this SQL file in MySQL Workbench
 -- Select Ctrl+A to select all
 -- Click the lightning icon to run the selection
 -- Right click in the directory tab and select refresh to view changes
--- The new database with relevant tables should be visible
+-- The new database with relevant tables and data should be visible
 -- If there are any issues, please contact me 
 -- Callum McFadgen
 
@@ -20,7 +19,7 @@ CREATE DATABASE got_apples_db;
 -- USE NEW DATABASE --
 USE got_apples_db;
 
--- CREATE TABLES START --
+-- CREATE TABLES --
 DROP PROCEDURE IF EXISTS CreateTables;
 DELIMITER //
 CREATE PROCEDURE CreateTables()
@@ -126,9 +125,8 @@ BEGIN
     END//
 DELIMITER ;
 CALL CreateTables();
--- CREATE TABLES END --  
 
--- POPULATE USER TABLE START --
+-- POPULATE USER TABLE --
 DROP PROCEDURE IF EXISTS PopulateUserTable;
 DELIMITER //
 CREATE PROCEDURE PopulateUserTable()
@@ -354,7 +352,7 @@ END//
 DELIMITER ;
 CALL PopulateUserTable();
 
--- POPULATE VARIETY TABLE START --
+-- POPULATE VARIETY TABLE --
 DROP PROCEDURE IF EXISTS PopulateVarietyTable;
 DELIMITER //
 CREATE PROCEDURE PopulateVarietyTable()
@@ -484,7 +482,7 @@ END//
 DELIMITER ;
 CALL PopulateVarietyTable();
 
--- POPULATE ORCHARD TABLE START --
+-- POPULATE ORCHARD TABLE --
 DROP PROCEDURE IF EXISTS PopulateOrchardTable;
 DELIMITER //
 CREATE PROCEDURE PopulateOrchardTable()
@@ -620,7 +618,7 @@ END//
 DELIMITER ;
 CALL PopulateOrchardTable();
 
--- POPULATE AUCTION TABLE START --
+-- POPULATE AUCTION TABLE --
 DROP PROCEDURE IF EXISTS PopulateAuctionTable;
 DELIMITER //
 CREATE PROCEDURE PopulateAuctionTable()
@@ -1007,7 +1005,7 @@ END//
 DELIMITER ;
 CALL PopulateAuctionTable();
 
--- POPULATE BID TABLE START --
+-- POPULATE BID TABLE --
 DROP PROCEDURE IF EXISTS PopulateBidTable;
 DELIMITER //
 CREATE PROCEDURE PopulateBidTable()
@@ -1105,6 +1103,78 @@ END//
 DELIMITER ;
 CALL PopulateWatchlistTable();
 
+
+-- USER LOGIN PROCEDURE --
+DROP PROCEDURE IF EXISTS UserLogin;
+DELIMITER //
+CREATE PROCEDURE UserLogin(pr_username varchar(50), pr_password varchar(50))
+BEGIN
+START TRANSACTION;
+	
+	SELECT COUNT(`password`)
+    FROM `user`
+    WHERE
+		user_name = pr_username AND `password` = pr_password
+    INTO @lc_credential_match;
     
+    IF
+		@lc_credential_match = 1 
+		THEN
+		SELECT 'LOGIN SUCCEDED' AS MESSAGE;
+	ELSEIF
+		@lc_credential_match = 0
+		THEN
+		SELECT 'LOGIN FAILED' AS MESSAGE;
+	END IF;
+		
+COMMIT;
+END//
+DELIMITER ;
+
+-- CALL UserLogin("username", "password");
+
+
+
+
+
+
+
+
+
+
+
+-- UPDATE A USER NAME (TEST PROCEDURE)
+DROP PROCEDURE IF EXISTS UpdateFirstName;
+DELIMITER //
+CREATE PROCEDURE UpdateFirstName(pr_username varchar(50), pr_firstname varchar(50))
+BEGIN   
+START TRANSACTION;
+
+		UPDATE `user`
+        SET first_name = pr_firstname
+        WHERE 
+			user_name = pr_username;
+        SELECT 'Name changed' AS MESSAGE;
+    
+COMMIT;   
+END//
+DELIMITER ;
+-- CALL UpdateFirstName("Kal", "Callum"); 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
