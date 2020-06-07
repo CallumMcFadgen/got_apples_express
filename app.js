@@ -1,3 +1,5 @@
+// SET UP AND CONFIGURATION ////////////////////////////////////////////////////////
+
 // REQUIRED VARIABLES (IMPORTS) //////////////////////
 const express = require ('express');
 const app = express();
@@ -11,7 +13,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan('short'));
 app.use(express.static('./public'));
 app.use(cors());
-
 
 // DB CONNECTION CONFIGURATION ///////////////////////
 function MySQLConnection () {
@@ -35,36 +36,12 @@ app.get("/", (req, res) => {
 });
 
 
-
-
 // REST API ROUTES //////////////////////////////////////////////////////////////////
 
+// GET ROUTES///////////////////////////////////////
 
-// GET A SPECIFIC USER FROM THE USER TABLE BY USERNAME
-// EXAMPLE ROUTE - http://localhost:3333/get_user/Kal
-
-app.get('/get_user/:username', (req, res) => {
-
-    const userName = req.params.username
-
-    const queryString = "SELECT * FROM user WHERE user_name = ?"
-    MySQLConnection().query(queryString, [userName], (err, rows, fields) => {
-        if (err) {
-            console.log("Get user " + userName + " failed: " + err)
-            res.sendStatus(500)
-            return
-        };
-        console.log("Get user " + userName + " succeded")
-        res.json(rows)
-    });
-});
-
-
-// GET ALL USERS FROM THE USER TABLE
-// EXAMPLE ROUTE - http://localhost:3333/get_users
-
+// GET ALL USERS FROM THE USER TABLE  // EXAMPLE ROUTE - http://localhost:3333/get_users
 app.get('/get_users', (req, res) => {
-
     const queryString = "SELECT * FROM user"
     MySQLConnection().query(queryString, (err, rows, fields) => {
         if (err) {
@@ -78,8 +55,152 @@ app.get('/get_users', (req, res) => {
 });
 
 
-// POST A NEW USER CALLED BOB BELCHER TO THE USER TABLE
-// EXAMPLE ROUTE - http://localhost:3333/post_user
+// GET ALL AUCTIONS FROM THE AUCTION TABLE  // EXAMPLE ROUTE - http://localhost:3333/get_auctions
+app.get('/get_auctions', (req, res) => {
+    const queryString = "SELECT * FROM auction"
+    MySQLConnection().query(queryString, (err, rows, fields) => {
+        if (err) {
+            console.log("Get auctions failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get auctions succeded")
+        res.json(rows);
+    });
+});
+
+
+// GET ALL ORCHARDS FROM THE ORCHARD TABLE  // EXAMPLE ROUTE - http://localhost:3333/get_orchards
+app.get('/get_orchards', (req, res) => {
+    const queryString = "SELECT * FROM orchard"
+    MySQLConnection().query(queryString, (err, rows, fields) => {
+        if (err) {
+            console.log("Get orchards failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get orchards succeded")
+        res.json(rows);
+    });
+});
+
+
+
+// GET ALL GROWERS FROM THE USER TABLE  // EXAMPLE ROUTE - http://localhost:3333/get_growers
+app.get('/get_growers', (req, res) => {
+    const queryString = "SELECT * FROM user WHERE got_apples_member = true"
+    MySQLConnection().query(queryString, (err, rows, fields) => {
+        if (err) {
+            console.log("Get growers failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get growers succeded")
+        res.json(rows);
+    });
+});
+
+
+// GET ALL VARIETIES FROM THE VARIETY TABLE  // EXAMPLE ROUTE - http://localhost:3333/get_varieties
+app.get('/get_varieties', (req, res) => {
+    const queryString = "SELECT * FROM variety"
+    MySQLConnection().query(queryString, (err, rows, fields) => {
+        if (err) {
+            console.log("Get varieties failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get varieties succeded")
+        res.json(rows);
+    });
+});
+
+
+// GET A SPECIFIC USER FROM THE USER TABLE BY USERNAME  // EXAMPLE ROUTE - http://localhost:3333/get_user/Kal
+app.get('/get_user/:username', (req, res) => {
+    const userName = req.params.username
+    const queryString = "SELECT * FROM user WHERE user_name = ?"
+    MySQLConnection().query(queryString, [userName], (err, rows, fields) => {
+        if (err) {
+            console.log("Get user " + userName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get user " + userName + " succeded")
+        res.json(rows)
+    });
+});
+
+
+// GET A SPECIFIC VARIETY FROM THE VARIETY TABLE BY VARIETY NAME  // EXAMPLE ROUTE - http://localhost:3333/get_variety/Baujade
+app.get('/get_variety/:varietyname', (req, res) => {
+    const varietyName = req.params.varietyname
+    const queryString = "SELECT * FROM variety WHERE variety_name = ?"
+    MySQLConnection().query(queryString, [varietyName], (err, rows, fields) => {
+        if (err) {
+            console.log("Get variety " + varietyName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get variety " + varietyName + " succeded")
+        res.json(rows)
+    });
+});
+
+
+// GET A SPECIFIC AUCTION FROM THE AUCTION TABLE BY AUCTION NUMBER  // EXAMPLE ROUTE - http://localhost:3333/get_auction/1
+app.get('/get_auction/:auctionnumber', (req, res) => {
+    const auctionNumber = req.params.auctionnumber
+    const queryString = "SELECT * FROM auction WHERE auction_number = ?"
+    MySQLConnection().query(queryString, [auctionNumber], (err, rows, fields) => {
+        if (err) {
+            console.log("Get auction " + auctionNumber + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get auction " + auctionNumber + " succeded")
+        res.json(rows)
+    });
+});
+
+
+// GET A SPECIFIC ORCHARD FROM THE ORCHARD TABLE BY ORCHARD NAME  // EXAMPLE ROUTE - http://localhost:3333/get_orchard/Bushlands Orchard
+app.get('/get_orchard/:orchardname', (req, res) => {
+    const orchardName = req.params.orchardname
+    const queryString = "SELECT * FROM orchard WHERE orchard_name = ?"
+    MySQLConnection().query(queryString, [orchardName], (err, rows, fields) => {
+        if (err) {
+            console.log("Get orchard " + orchardName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get orchard " + orchardName + " succeded")
+        res.json(rows)
+    });
+});
+
+
+// GET SPECIFIC WATCHERS FROM THE WATCHLIST TABLE BY USERNAME  // EXAMPLE ROUTE - http://localhost:3333/get_watchlist/Kelly
+app.get('/get_watchlist/:username', (req, res) => {
+    const userName = req.params.username
+    const queryString = "SELECT * FROM watchlist WHERE user_name = ?"
+    MySQLConnection().query(queryString, [userName], (err, rows, fields) => {
+        if (err) {
+            console.log("Get watchlist for " + userName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get watchlist for " + userName + " succeded")
+        res.json(rows)
+    });
+});
+
+
+
+// POST ROUTES ///////////////////////////////////////
+
+
+// POST A NEW USER CALLED BOB BELCHER TO THE USER TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_user
 
 app.post('/post_user',(req, res) => { 
 
