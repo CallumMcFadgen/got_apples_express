@@ -201,7 +201,6 @@ app.get('/get_watchlist/:username', (req, res) => {
 
 
 // POST A NEW USER CALLED BOB BELCHER TO THE USER TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_user
-
 app.post('/post_user',(req, res) => { 
 
     const firstName = "Bob"
@@ -225,6 +224,26 @@ app.post('/post_user',(req, res) => {
             return
         };
         console.log("Post user succeded: user " + userName + " added")
+        res.end()
+    });
+});
+
+
+// POST A NEW WATCH TO THE WATCHLIST TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_watch/kal/3/2020-05-03 16:00:00
+app.post('/post_watch/:username/:auctionnumber/:date',(req, res) => { 
+
+    const userName = req.params.username
+    const auctionNumber = req.params.auctionnumber
+    const date = req.params.date
+
+    const queryString = "INSERT INTO watchlist (user_name, auction_number, date) VALUES (?, ?, ?)"
+    MySQLConnection().query(queryString, [userName, auctionNumber, date], (err, results, fields) => {
+        if (err) {
+            console.log("Post watch on auction " + auctionNumber + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Post watch on auction " + auctionNumber + " added")
         res.end()
     });
 });
