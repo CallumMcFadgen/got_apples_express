@@ -164,17 +164,17 @@ app.get('/get_auction/:auctionnumber', (req, res) => {
 });
 
 
-// GET A SPECIFIC ORCHARD FROM THE ORCHARD TABLE BY ORCHARD NAME  // EXAMPLE ROUTE - http://localhost:3333/get_orchard/Bushlands Orchard
-app.get('/get_orchard/:orchardname', (req, res) => {
-    const orchardName = req.params.orchardname
-    const queryString = "SELECT * FROM orchard WHERE orchard_name = ?"
-    MySQLConnection().query(queryString, [orchardName], (err, rows, fields) => {
+// GET A SPECIFIC ORCHARD FROM THE ORCHARD TABLE BY USER NAME  // EXAMPLE ROUTE - http://localhost:3333/get_orchard/Fitz
+app.get('/get_orchard/:username', (req, res) => {
+    const userName = req.params.username
+    const queryString = "SELECT * FROM orchard WHERE user_name = ?"
+    MySQLConnection().query(queryString, [userName], (err, rows, fields) => {
         if (err) {
-            console.log("Get orchard " + orchardName + " failed: " + err)
+            console.log("Get orchard for user " + userName + " failed: " + err)
             res.sendStatus(500)
             return
         };
-        console.log("Get orchard " + orchardName + " succeded")
+        console.log("Get orchard for user " + userName + " succeded")
         res.json(rows)
     });
 });
