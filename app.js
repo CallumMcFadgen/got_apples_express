@@ -57,7 +57,7 @@ app.get('/get_users', (req, res) => {
 
 // GET ALL AUCTIONS FROM THE AUCTION TABLE  // EXAMPLE ROUTE - http://localhost:3333/get_auctions
 app.get('/get_auctions', (req, res) => {
-    const queryString = "SELECT * FROM auction"
+    const queryString = "SELECT * FROM auction ORDER BY start_date DESC"
     MySQLConnection().query(queryString, (err, rows, fields) => {
         if (err) {
             console.log("Get auctions failed: " + err)
