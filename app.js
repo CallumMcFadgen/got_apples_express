@@ -179,6 +179,22 @@ app.get('/get_orchard/:username', (req, res) => {
 });
 
 
+// GET SPECIFIC AUCTIONS FROM THE AUCTION TABLE BY USER NAME  // EXAMPLE ROUTE - http://localhost:3333/get_grower_auctions/Col
+app.get('/get_grower_auctions/:username', (req, res) => {
+    const userName = req.params.username
+    const queryString = "SELECT * FROM auction WHERE user_name = ?"
+    MySQLConnection().query(queryString, [userName], (err, rows, fields) => {
+        if (err) {
+            console.log("Get auctions for user " + userName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get auctions for user " + userName + " succeded")
+        res.json(rows)
+    });
+});
+
+
 // GET SPECIFIC WATCHERS FROM THE WATCHLIST TABLE BY USERNAME  // EXAMPLE ROUTE - http://localhost:3333/get_watchlist/Kelly
 app.get('/get_watchlist/:username', (req, res) => {
     const userName = req.params.username
@@ -303,6 +319,32 @@ app.patch('/patch_user/:username',(req, res) => {
     });
 });
 
+
+// PATCH AN EXISTING USER // EXAMPLE ROUTE - http://localhost:3333/patch_user/
+app.patch('/patch_user/:first_name/:last_name/:email_address/:phone_number/:address_line_1/:address_line_2/:region/:city/:zip_code/:user_name',(req, res) => { 
+
+    const firstName = req.params.first_name
+    const lastName = req.params.last_name
+    const emailAddress = req.params.email_address
+    const phoneNumber =  req.params.phone_number
+    const addressLine1 = req.params.address_line_1
+    const addressLine2 = req.params.address_line_2
+    const region = req.params.region
+    const city = req.params.city
+    const zipCode = req.params.zip_code
+    const userName = req.params.user_name
+
+    const queryString = "UPDATE user SET first_name =?, last_name =?, email_address =?, phone_number =?, address_line_1 =?, address_line_2 =?, region =?, city =?, zip_code =? WHERE user_name =?"
+    MySQLConnection().query(queryString, [firstName, lastName, emailAddress, phoneNumber, addressLine1, addressLine2, region, city, zipCode, userName ], (err, results, fields) => {
+        if (err) {
+            console.log("Patch user " + userName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Patch user succeded: user " + userName + " updated")
+        res.end()
+    });
+});
 
 // DELETE A SPECIFIC USER FROM THE USER TABLE BY USERNAME
 // EXAMPLE - http://localhost:3333/delete_user/Bobby
