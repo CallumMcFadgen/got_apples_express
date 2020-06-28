@@ -85,7 +85,6 @@ app.get('/get_orchards', (req, res) => {
 });
 
 
-
 // GET ALL GROWERS FROM THE USER TABLE  // EXAMPLE ROUTE - http://localhost:3333/get_growers
 app.get('/get_growers', (req, res) => {
     const queryString = "SELECT * FROM user WHERE got_apples_member = true"
@@ -196,28 +195,62 @@ app.get('/get_watchlist/:username', (req, res) => {
 });
 
 
+// CHECK USER CREDENTIALS FOR LOGIN USING USERNAME AND PASSWORD // EXAMPLE SUCCESFUL ROUTE - http://localhost:3333/get_login_auth/Kal/P@ssword1
+app.get('/get_login_auth/:id/:password',(req, res) => { 
+
+    const userName = req.params.id
+    const password = req.params.password
+
+    const queryString = "CALL UserLogin(?, ?);"
+    MySQLConnection().query(queryString, [userName, password], (err, results) => {
+        if (err) {
+            console.log("Authentication request for " + userName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Authentication request for " + userName + " succesful")
+        res.json(results[0])
+        res.end()
+    });
+});
+
+
+// GET A COUNT OF USERS WITH A USERNAME MATCH  // EXAMPLE ROUTE - http://localhost:3333/get_username_count/Col
+app.get('/get_username_count/:username', (req, res) => {
+    const userName = req.params.username
+    const queryString = "CALL UsernameCheck(?);"
+    MySQLConnection().query(queryString, [userName],  (err, results) => {
+        if (err) {
+            console.log("Username check for " + userName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Username check for " + userName + " succesful")
+        res.json(results[0])
+        res.end()
+    });
+});
+
 
 // POST ROUTES ///////////////////////////////////////
 
+// POST A NEW USER TO THE USER TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_user/
+app.post('/post_user/:first_name/:last_name/:user_name/:password/:email_address/:phone_number/:address_line_1/:address_line_2/:region/:city/:zip_code',(req, res) => { 
 
-// POST A NEW USER CALLED BOB BELCHER TO THE USER TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_user
-app.post('/post_user',(req, res) => { 
+    const firstName = req.params.first_name
+    const lastName = req.params.last_name
+    const userName = req.params.user_name
+    const password = req.params.password
+    const emailAddress = req.params.email_address
+    const phoneNumber =  req.params.phone_number
+    const addressLine1 = req.params.address_line_1
+    const addressLine2 = req.params.address_line_2
+    const region = req.params.region
+    const city = req.params.city
+    const zipCode = req.params.zip_code
 
-    const firstName = "Bob"
-    const lastName = "Belcher"
-    const userName = "Bobby"
-    const password = "P@ssword1"
-    const emailAddress = "bobbybobbob@gmail.com"
-    const phoneNumber =  "1234567891234567"
-    const addressLine1 = "12 Ocean Avenue"
-    const addressLine2 = "Long Island"
-    const region = "New Jersey"
-    const city = "New York"
-    const zipCode = "1234"
-    const memberStatus = 0
-
-    const queryString = "INSERT INTO user (user_name, first_name, last_name, password, email_address, phone_number, address_line_1, address_line_2, region, city, zip_code, got_apples_member) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    MySQLConnection().query(queryString, [userName, firstName, lastName, password, emailAddress, phoneNumber, addressLine1, addressLine2, region, city, zipCode, memberStatus], (err, results, fields) => {
+    const queryString = "INSERT INTO user (user_name, first_name, last_name, password, email_address, phone_number, address_line_1, address_line_2, region, city, zip_code) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    MySQLConnection().query(queryString, [userName, firstName, lastName, password, emailAddress, phoneNumber, addressLine1, addressLine2, region, city, zipCode, ], (err, results, fields) => {
         if (err) {
             console.log("Post user " + userName + " failed: " + err)
             res.sendStatus(500)
@@ -249,9 +282,9 @@ app.post('/post_watch/:username/:auctionnumber/:date',(req, res) => {
 });
 
 
-// PATCH AN EXISTING USER WITH AN NAME UPDATE
-// EXAMPLE - http://localhost:3333/patch_user/Bobby
+// PATCH ROUTES ///////////////////////////////////////
 
+// PATCH AN EXISTING USER WITH AN NAME UPDATE // EXAMPLE ROUTE - http://localhost:3333/patch_user/Bobby
 app.patch('/patch_user/:username',(req, res) => { 
 
     const userName = req.params.username
@@ -323,127 +356,11 @@ app.post('/post_auction',(req, res) => {
 });
 
 
-// CHECK USER CREDENTIALS FOR LOGIN USING USERNAME AND PASSWORD
-// EXAMPLE SUCCESFUL ROUTE - http://localhost:3333/get_login_auth/Kal/P@ssword1
-// EXAMPLE UNSUCCESFUL ROUTE - http://localhost:3333/get_login_auth/Kal/P@ssword
-// EXAMPLE UNSUCCESFUL ROUTE - http://localhost:3333/get_login_auth/Ka/P@ssword1
-
-app.get('/get_login_auth/:id/:password',(req, res) => { 
-
-    const userName = req.params.id
-    const password = req.params.password
-
-    const queryString = "CALL UserLogin(?, ?);"
-    MySQLConnection().query(queryString, [userName, password], (err, results) => {
-        if (err) {
-            console.log("Authentication request for " + userName + " failed: " + err)
-            res.sendStatus(500)
-            return
-        };
-
-        console.log("Authentication request for " + userName + " succesful")
-        res.json(results[0])
-
-        if (results[0] = "LOGIN SUCCEDED") {
-            console.log ("Succesful login for user: " + userName);
-        }
-        else if (results[0] = "LOGIN FAILED"){
-            console.log ("Unsuccesful login for user: " + userName);
-        }
-
-        res.end()
-    });
-});
-
-
 // TO DO - BID ROUTE FOR CREATING/UPDATING A BID USING A MYSQL PROCEDURE
-
-
-
 
 
 // TESTING ////////////////////////////////////////////////////////////////////////////////////////////
 
-
-// POST A NEW USER CALLED BOB BELCHER TO THE USER TABLE
-// EXAMPLE ROUTE - http://localhost:3333/post_user
-
-// app.post('/post_user',(req, res) => { 
-
-//     const firstName = "Bob"
-//     const lastName = "Belcher"
-//     const userName = "Bobby"
-//     const password = "P@ssword1"
-//     const emailAddress = "bobbybobbob@gmail.com"
-//     const phoneNumber =  "1234567891234567"
-//     const addressLine1 = "12 Ocean Avenue"
-//     const addressLine2 = "Long Island"
-//     const region = "New Jersey"
-//     const city = "New York"
-//     const zipCode = "1234"
-//     const memberStatus = 0
-
-//     const queryString = "INSERT INTO user (user_name, first_name, last_name, password, email_address, phone_number, address_line_1, address_line_2, region, city, zip_code, got_apples_member) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-//     MySQLConnection().query(queryString, [userName, firstName, lastName, password, emailAddress, phoneNumber, addressLine1, addressLine2, region, city, zipCode, memberStatus], (err, results, fields) => {
-//         if (err) {
-//             console.log("Post user " + userName + " failed: " + err)
-//             res.sendStatus(500)
-//             return
-//         };
-//         console.log("Post user succeded: user " + userName + " added")
-//         res.end()
-//     });
-// });
-
-
-
-// // working specific user api
-// app.get('/orchard/:orchard_name', (req, res) => {
-
-//     const orchard_name = req.params.orchard_name
-
-//     const queryString = "SELECT * FROM orchard WHERE orchard_name = ?"
-//     MySQLConnection().query(queryString, [orchard_name], (err, rows, fields) => {
-//         console.log(rows);
-//         res.json(rows);
-//     });
-// });
-
-
-// // working all orchards api
-// app.get('/orchards', (req, res) => {
-
-//     const queryString = "SELECT * FROM orchard"
-//     MySQLConnection().query(queryString, (err, rows, fields) => {
-//         console.log(rows);
-//         res.json(rows);
-//     });
-
-// });
-
-
-// // Updating a user using a MySQL stored procedure
-// // http://localhost:3333/patch_user_procedure/Kal/Test2
-// app.patch('/patch_user_procedure/:id/:param',(req, res) => { 
-
-//     const userName = req.params.id
-//     const firstName = req.params.param
-
-//     const queryString = "CALL UpdateFirstName(?, ?);"
-//     MySQLConnection().query(queryString, [userName, firstName], (err, results) => {
-//         if (err) {
-//             console.log("Patch user " + userName + " failed: " + err)
-//             res.sendStatus(500)
-//             return
-//         };
-//         console.log("Patch user succeded: user " + userName + " updated")
-//         res.json(results[0])
-//         if (results[0] = "Name changed") {
-//             console.log ("Test name changed Test")
-//         }
-//         res.end()
-//     });
-// });
 
 
 
