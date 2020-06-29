@@ -277,6 +277,36 @@ app.post('/post_user/:first_name/:last_name/:user_name/:password/:email_address/
     });
 });
 
+// POST A NEW AUCTION TO THE AUCTION TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_auction/
+app.post('/post_auction/:title/:weight/:start_date/:end_date/:description/:reserve_amount/:buy_now/:buy_now_amount/:delivery/:deliver_amount/:user_name/:variety_name',(req, res) => { 
+
+    console.log("post auction called");
+
+    const title = req.params.title
+    const weight = req.params.weight
+    const startDate = req.params.start_date
+    const endDate = req.params.end_date
+    const description = req.params.description
+    const reserveAmount = req.params.reserve_amount
+    const buyNow = req.params.buy_now
+    const buyNowAmount =  req.params.buy_now_amount
+    const delivery = req.params.delivery
+    const deliveryAmount = req.params.start_date.deliveryAmount
+    const userName = req.params.user_name
+    const VarietyName = req.params.variety_name
+
+    const queryString = "INSERT INTO auction (title, weight, start_date, end_date, `description`, reserve_amount, buy_now, buy_now_amount, delivery, delivery_amount, variety_name, user_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+    MySQLConnection().query(queryString, [title, weight, startDate, endDate, description, reserveAmount, buyNow, buyNowAmount, delivery, deliveryAmount, VarietyName, userName], (err, results, fields) => {
+        if (err) {
+            console.log("Post auction failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Post auction succeded")
+        res.end()
+    });
+});
+
 
 // POST A NEW WATCH TO THE WATCHLIST TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_watch/kal/3/2020-05-03 16:00:00
 app.post('/post_watch/:username/:auctionnumber/:date',(req, res) => { 
