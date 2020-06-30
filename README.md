@@ -46,11 +46,15 @@ Open the <b>got_apples_express</b> folder in an editor with a terminal, such as 
 Edit the <b>MySQLConnection</b> function in the prototypes <b>App.js</b> file to match your local MySQL details, such as password, user, etc.
 <br />
 <br />
-Open a terminal and enter the following command to start the prototype on a development server.
+Open a terminal and enter the following command
+```
+npm install
+```
+This will ensure that all of the required packages and dependencies are imported and installed.  Then enter
 ```
 nodemon app.js
 ```
-Once the application has compiled, open a browser and enter the following URL. 
+To start the prototype on a development server.  Once the application has compiled, open a browser and enter the following URL. 
 ```
 http://localhost:3333
 ```
