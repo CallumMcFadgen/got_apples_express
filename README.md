@@ -37,13 +37,13 @@ Link here
 
 Simply fork and clone a copy of this repo to your local device and ensure that MySQL Workbench and Node.js are installed.
 
-Open the SQL file in the database_script folder and copy the contents into a query tab in MySQL workbench and run it to create the database and populate it with dummy data as per the instructions at the top of the script.
+Open the SQL file in the <b>database_script</b> folder and copy the contents into a query tab in MySQL workbench and run it to create the database and populate it with dummy data as per the instructions at the top of the script.
 <br />
 <br />
 Open the <b>got_apples_express</b> folder in an editor with a terminal, such as VS Code.
 <br />
 <br />
-Edit the MySQLConnection function in the prototypes App.js file to match your local MySQL details, such as password, user, etc.
+Edit the MySQLConnection function in the prototypes <b>App.js</b> file to match your local MySQL details, such as password, user, etc.
 <br />
 <br />
 Open a terminal and enter the following command to start the prototype on a development server.
@@ -57,9 +57,11 @@ http://localhost:3333
 This should display a message that the server is running.
 <br />
 <br />
-As an additional test, the following GET request can be run directly in the browser to return a list of users from the user table, this confirms that the database is being accessed by the Express.js REST API service
+As an additional test, the following GET request can be run directly in the browser address bar to return a list of users from the user table, this confirms that the database is being accessed by the Express.js REST API service
 ```
 http://localhost:3333/get_users
 ```
-Now that the application is running as expected, the next step is to open the Vue web application to use some of these APIs in the Client application.
+Now that the application is running as expected, the next step is to open the Vue web application to use some of these APIs in a Client application.
+<br />
+<br />
 If there are any issues with installing or running the Expres.js service, please do not hesitate to contact me at Callum-McFadgen@live.nmit.ac.nz
