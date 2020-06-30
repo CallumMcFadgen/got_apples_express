@@ -43,7 +43,7 @@ Open the SQL file in the <b>database_script</b> folder and copy the contents int
 Open the <b>got_apples_express</b> folder in an editor with a terminal, such as VS Code.
 <br />
 <br />
-Edit the MySQLConnection function in the prototypes <b>App.js</b> file to match your local MySQL details, such as password, user, etc.
+Edit the <b>MySQLConnection</b> function in the prototypes <b>App.js</b> file to match your local MySQL details, such as password, user, etc.
 <br />
 <br />
 Open a terminal and enter the following command to start the prototype on a development server.
