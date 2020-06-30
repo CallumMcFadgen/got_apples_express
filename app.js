@@ -1,5 +1,6 @@
 // SET UP AND CONFIGURATION ////////////////////////////////////////////////////////
 
+
 // REQUIRED VARIABLES (IMPORTS) //////////////////////
 const express = require ('express');
 const app = express();
@@ -8,11 +9,13 @@ const mysql = require('mysql');
 const bodyParser = require ('body-parser');
 const cors = require('cors');
 
+
 // REQUIRED USINGS (MIDDLEWARE) //////////////////////
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(morgan('short'));
 app.use(express.static('./public'));
 app.use(cors());
+
 
 // DB CONNECTION CONFIGURATION ///////////////////////
 function MySQLConnection () {
@@ -25,10 +28,12 @@ function MySQLConnection () {
     });
 };
 
+
 // START SERVER ON PORT 3333 /////////////////////////
 app.listen(3333, () => {
     console.log('Got Apples! RESTful API service is running on port 3333');
 });
+
 
 // DISPLAY MESSAGE IN BROWSER ///////////////////////
 app.get("/", (req, res) => {
@@ -179,6 +184,38 @@ app.get('/get_orchard/:username', (req, res) => {
 });
 
 
+// GET A AVERAGE RESERVE FROM THE AUCTION TABLE BY VARIETY NAME  // EXAMPLE ROUTE - http://localhost:3333/get_avg_reserve/Fitz
+app.get('/get_avg_reserve/:varietyname', (req, res) => {
+    const varietyName = req.params.varietyname
+    const queryString = "SELECT SUM(reserve_amount) AS reserve FROM auction WHERE variety_name = ?"
+    MySQLConnection().query(queryString, [varietyName], (err, rows, fields) => {
+        if (err) {
+            console.log("Get average reserve for variety " + varietyName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get average reserve for variety " + varietyName + " succeded")
+        res.json(rows)
+    });
+});
+
+
+// GET A AVERAGE WEIGHT FROM THE AUCTION TABLE BY VARIETY NAME  // EXAMPLE ROUTE - http://localhost:3333/get_avg_weight/Fitz
+app.get('/get_avg_weight/:varietyname', (req, res) => {
+    const varietyName = req.params.varietyname
+    const queryString = "SELECT SUM(weight) AS weight FROM auction WHERE variety_name = ?"
+    MySQLConnection().query(queryString, [varietyName], (err, rows, fields) => {
+        if (err) {
+            console.log("Get average weight for variety " + varietyName + " failed: " + err)
+            res.sendStatus(500)
+            return
+        };
+        console.log("Get average weight for variety " + varietyName + " succeded")
+        res.json(rows)
+    });
+});
+
+
 // GET SPECIFIC AUCTIONS FROM THE AUCTION TABLE BY USER NAME  // EXAMPLE ROUTE - http://localhost:3333/get_grower_auctions/Col
 app.get('/get_grower_auctions/:username', (req, res) => {
     const userName = req.params.username
@@ -276,6 +313,7 @@ app.post('/post_user/:first_name/:last_name/:user_name/:password/:email_address/
         res.end()
     });
 });
+
 
 // POST A NEW AUCTION TO THE AUCTION TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_auction/
 app.post('/post_auction/:title/:weight/:start_date/:end_date/:description/:reserve_amount/:buy_now/:buy_now_amount/:delivery/:deliver_amount/:user_name/:variety_name',(req, res) => { 
@@ -376,9 +414,8 @@ app.patch('/patch_user/:first_name/:last_name/:email_address/:phone_number/:addr
     });
 });
 
-// DELETE A SPECIFIC USER FROM THE USER TABLE BY USERNAME
-// EXAMPLE - http://localhost:3333/delete_user/Bobby
 
+// DELETE A SPECIFIC USER FROM THE USER TABLE BY USERNAME  // EXAMPLE - http://localhost:3333/delete_user/Bobby
 app.delete('/delete_user/:username', (req, res) => {
 
     const userName = req.params.username
@@ -396,44 +433,39 @@ app.delete('/delete_user/:username', (req, res) => {
 });
 
 
-// POST A NEW AUCTION TO THE AUCTION TABLE
-// EXAMPLE ROUTE - http://localhost:3333/post_auction
-
-app.post('/post_auction',(req, res) => { 
-
-    const title = "Test Auction"
-    const weight = 3
-    const startDate = "2020-05-04 12:30:00"
-    const endDate = "2020-05-11 12:30:00"
-    const description = "Description for test auction."
-    const reserveAmount =  4
-    const buyNow = 1
-    const buyNowAmount =  4.50
-    const delivery = 1
-    const deliveryAmount = .50
-    const sold = 0
-    const userName = "Kal"
-    const VarietyName = "Blenheim Orange"
-
-    const queryString = "INSERT INTO auction (title, weight, start_date, end_date, `description`, reserve_amount, buy_now, buy_now_amount, delivery, delivery_amount, sold, variety_name, user_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    MySQLConnection().query(queryString, [title, weight, startDate, endDate, description, reserveAmount, buyNow, buyNowAmount, delivery, deliveryAmount, sold, VarietyName, userName], (err, results, fields) => {
-        if (err) {
-            console.log("Post auction failed: " + err)
-            res.sendStatus(500)
-            return
-        };
-        console.log("Post auction succeded")
-        res.end()
-    });
-});
-
-
 // TO DO - BID ROUTE FOR CREATING/UPDATING A BID USING A MYSQL PROCEDURE
 
 
 // TESTING ////////////////////////////////////////////////////////////////////////////////////////////
 
+// POST A NEW AUCTION TO THE AUCTION TABLE  // EXAMPLE ROUTE - http://localhost:3333/post_auction
+// app.post('/post_auction',(req, res) => { 
 
+//     const title = "Test Auction"
+//     const weight = 3
+//     const startDate = "2020-05-04 12:30:00"
+//     const endDate = "2020-05-11 12:30:00"
+//     const description = "Description for test auction."
+//     const reserveAmount =  4
+//     const buyNow = 1
+//     const buyNowAmount =  4.50
+//     const delivery = 1
+//     const deliveryAmount = .50
+//     const sold = 0
+//     const userName = "Kal"
+//     const VarietyName = "Blenheim Orange"
+
+//     const queryString = "INSERT INTO auction (title, weight, start_date, end_date, `description`, reserve_amount, buy_now, buy_now_amount, delivery, delivery_amount, sold, variety_name, user_name) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+//     MySQLConnection().query(queryString, [title, weight, startDate, endDate, description, reserveAmount, buyNow, buyNowAmount, delivery, deliveryAmount, sold, VarietyName, userName], (err, results, fields) => {
+//         if (err) {
+//             console.log("Post auction failed: " + err)
+//             res.sendStatus(500)
+//             return
+//         };
+//         console.log("Post auction succeded")
+//         res.end()
+//     });
+// });
 
 
 
