@@ -28,17 +28,19 @@ BEGIN
     CREATE TABLE `user`
     (
 		user_name CHAR(50) NOT NULL,
-		first_name CHAR(50), 
-		last_name CHAR(50),
-		`password` CHAR(50),
-		email_address CHAR(50),
-		phone_number CHAR(50),
-		address_line_1 CHAR(50),
+		first_name CHAR(50) NOT NULL, 
+		last_name CHAR(50) NOT NULL,
+		`password` CHAR(50) NOT NULL,
+		email_address CHAR(50) NOT NULL,
+		phone_number CHAR(50) NOT NULL,
+		address_line_1 CHAR(50) NOT NULL,
 		address_line_2 CHAR(50),
 		region CHAR(50),
-		city CHAR(50),
-		zip_code CHAR(50),
+		city CHAR(50) NOT NULL,
+		zip_code CHAR(50) NOT NULL,
 		got_apples_member BOOL DEFAULT FALSE,
+		image CHAR (50),
+		bio MEDIUMTEXT,
         PRIMARY KEY (user_name)
     );
     
@@ -52,16 +54,13 @@ BEGIN
         cooking BOOL,
 		`description` MEDIUMTEXT,
 		season CHAR(50),
+        image CHAR (50),
         PRIMARY KEY (variety_name)
     );
     
     CREATE TABLE orchard
     (
 		orchard_name CHAR(50) NOT NULL,
-		owner_first_name CHAR(50), 
-		owner_last_name CHAR(50),
-		email_address CHAR(50),
-		phone_number CHAR(50),
 		address_line_1 CHAR(50),
 		address_line_2 CHAR(50),
 		region CHAR(50),
@@ -144,20 +143,25 @@ BEGIN
     region,
     city,
     zip_code,
-    got_apples_member)
+    got_apples_member,
+	image,
+    bio)
 	VALUES (
-    'Kal',
-    'Callum',
-    'McFadgen',
+    'Col',
+    'Colin',
+    'McDonald',
     'P@ssword1',
-    'Callum-McFadgen@live.nmit.ac.nz',
+    'colin_mcdonald@gmail.com',
     '88379350806',
     '47 Kea Street',
     'Stoke',
     'Tasman',
     'Nelson',
     '7011',
-    true);
+	true,
+	'user_colin_mcdonald.png',
+	'Hi, I’m Colin, I’m one of the newest members of Got Appels.  I am a third-generation orchardist from Stoke and I own the Windsong Orchard in Renwick, where we specialize in producing some of the finest Blenheim Orange apples in the top of the South Island.  I really enjoy using more modern techniques and technology in fruit production, as I feel that this helps to delivery the very best produce to consumers.'
+	);
 	
 	INSERT INTO user (
     user_name,
@@ -225,7 +229,9 @@ BEGIN
     region,
     city,
     zip_code,
-    got_apples_member)
+    got_apples_member,
+	image,
+    bio)
 	VALUES (
     'Mike',
     'Mychal',
@@ -238,7 +244,9 @@ BEGIN
     'Tasman',
     'Motueka',
     '6031',
-    true);
+    true,
+    'user_mychal_soame.png',
+    'I’m Mychal and according to my wife and children, I suffer from some rare form of apple madness.  This is hardly news to me as I have had a strong passion for growing produce for most of my life.  So when the opportunity came up to purchase an orchard of heritage Baujade apple trees in Rewaka, I had to go for it.  10 years later and I could not be happier with my decision.  My latest ideas involve working with some of the local brewers to experiment with my Baujade apples to produce a boutique cider, watch this space.');
     
 	INSERT INTO user (
     user_name,
@@ -252,7 +260,9 @@ BEGIN
     region,
     city,
     zip_code,
-    got_apples_member)
+    got_apples_member,
+	image,
+    bio)
 	VALUES (
     'Fitz',
     'Fitz',
@@ -265,7 +275,9 @@ BEGIN
     'Tasman',
     'Motueka',
     '6058',
-    true);
+    true,
+    'user_fitz_jouannin.png',
+    'My name is Fitz and I often get described by people who know me as a hardcase guy with a heart of gold!  I have been growing apples, especially heritage varieties, for my entire life and I definitely have no plans of stopping.  I currently run my family’s orchard, Mountainview Orchard, in Ngatomoti, where we have been growing the finest Worcester Pearmain apples ever since I was a little boy on trees planted by my grandfather in 1920.');
     
     INSERT INTO user (
     user_name,
@@ -306,7 +318,9 @@ BEGIN
     region,
     city,
     zip_code,
-    got_apples_member)
+    got_apples_member,
+	image,
+    bio)
 	VALUES (
     'Walt',
     'Walt',
@@ -319,7 +333,9 @@ BEGIN
     'Tasman',
     'Nelson',
     '7008',
-    true);
+    true,
+    'user_walt_laughren.png',
+    'My name is Walt and I’m the proud owner of Bushlands Orchard in Wakefield.  I originally came from an orchardist family in Hawkes Bay so I was very surprised when I was driving past Bushlands one day and I saw the fruit on the trees and recognized them as Golden Delicious which are very rare in New Zealand despite their past popularity.  So, when I had the opportunity to purchase the orchard 5 years ago, it was a no brainer.  I love preserving this heritage variety and I get a real kick out of introducing people to this flavour of the past.');
     
     INSERT INTO user (
     user_name,
@@ -366,7 +382,8 @@ BEGIN
 	eating,
 	cooking,
 	season,
-	`description`)
+	`description`, 
+    image)
 	VALUES(
 	'Blenheim Orange',
     'Orange',
@@ -375,7 +392,8 @@ BEGIN
     true,
     true,
     'Mid',
-    'Blenheim Orange is a heritage apple with an orange/yellow, slightly russeted skin striped with dull red. The fruit is large with a round, flat, regular shape. It has a rich yellow flesh that is crisp, sweet, juicy and aromatic. Cooks well. Makes a large, spreading flat headed tree. Tip bearing mid season. Triploid variety.'
+    'Blenheim Orange is a heritage apple with an orange/yellow, slightly russeted skin striped with dull red. The fruit is large with a round, flat, regular shape. It has a rich yellow flesh that is crisp, sweet, juicy and aromatic. Cooks well. Makes a large, spreading flat headed tree. Tip bearing mid season. Triploid variety.',
+    'variety_blenheim_orange.png'
     );
     
 	INSERT INTO variety (
@@ -386,7 +404,8 @@ BEGIN
 	eating,
 	cooking,
 	season,
-	`description`)
+	`description`,
+    image)
 	VALUES(
 	'Golden Delicious',
     'Yellow',
@@ -395,7 +414,8 @@ BEGIN
     true,
     false,
     'Late',
-    'Golden Delicious produces very sweet honey flavoured fruit, especially when tree ripened. This self fertile variety crops regularly and heavily late in the season. Apples ripen yellow. It produces on both tips and spurs.'
+    'Golden Delicious produces very sweet honey flavoured fruit, especially when tree ripened. This self fertile variety crops regularly and heavily late in the season. Apples ripen yellow. It produces on both tips and spurs.',
+	'variety_golden_delicious.png'
     );
     
 	INSERT INTO variety (
@@ -406,7 +426,8 @@ BEGIN
 	eating,
 	cooking,
 	season,
-	`description`)
+	`description`,
+    image)
 	VALUES(
 	'Bramleys Seedling',
     'Green',
@@ -415,7 +436,8 @@ BEGIN
     false,
     true,
     'Mid',
-    'Bramleys Seedling is a heritage apple of medium to large size. The fruit is round and has a distinctive conical shape. It has a firm, tart flesh with a good flavour and is sweet with plenty of juice. Keeps very well.'
+    'Bramleys Seedling is a heritage apple of medium to large size. The fruit is round and has a distinctive conical shape. It has a firm, tart flesh with a good flavour and is sweet with plenty of juice. Keeps very well.',
+	'variety_bramleys_seedling.png'
     );
 
 	INSERT INTO variety (
@@ -426,7 +448,8 @@ BEGIN
 	eating,
 	cooking,
 	season,
-	`description`)
+	`description`,
+    image)
 	VALUES(
 	'Worcester Pearmain',
     'Red',
@@ -435,7 +458,8 @@ BEGIN
     true,
     false,
     'Early',
-    'Worcester Pearmain produces a bright red medium-sized fruit with crisp and juicy flesh and an intense strawberry flavour. This very sweet apple is popular with children. The tree is a heavy and regular early season bearer.'
+    'Worcester Pearmain produces a bright red medium-sized fruit with crisp and juicy flesh and an intense strawberry flavour. This very sweet apple is popular with children. The tree is a heavy and regular early season bearer.',
+    'variety_worcester_pearmain.png'
     );
     
 	INSERT INTO variety (
@@ -446,7 +470,8 @@ BEGIN
 	eating,
 	cooking,
 	season,
-	`description`)
+	`description`,
+    image)
 	VALUES(
 	'Baujade',
     'Green',
@@ -455,7 +480,8 @@ BEGIN
     false,
     true,
     'Late',
-    'A French bred Granny Smith-type without the thick skin of a Granny Smith apple. Ripening late season. Medium size, sweet and aromatic. Well suited to warmer areas. Disease resistant to perfect for organic growing.'
+    'A French bred Granny Smith-type without the thick skin of a Granny Smith apple. Ripening late season. Medium size, sweet and aromatic. Well suited to warmer areas. Disease resistant to perfect for organic growing.',
+    'variety_baujade.png'
     );
     
 	INSERT INTO variety (
@@ -466,7 +492,8 @@ BEGIN
 	eating,
 	cooking,
 	season,
-	`description`)
+	`description`,
+    image)
 	VALUES(
 	'Tydemans Late Orange',
     'Orange',
@@ -475,7 +502,8 @@ BEGIN
     false,
     true,
     'Late',
-	'Tydemans Late Orange is a heritage variety. This apple has an intensely strong, rich and aromatic flavour reminiscent of Coxs Orange Pippin. The fruit has is of a medium size, has a purplish-red skin with yellow flesh and ripens late in the season. It has excellent storage qualities and the tree is vigorous and productive. Tendency to biennial bearing, so fruitlets should be thinned in December to try to avoid this.'
+	'Tydemans Late Orange is a heritage variety. This apple has an intensely strong, rich and aromatic flavour reminiscent of Coxs Orange Pippin. The fruit has is of a medium size, has a purplish-red skin with yellow flesh and ripens late in the season. It has excellent storage qualities and the tree is vigorous and productive. Tendency to biennial bearing, so fruitlets should be thinned in December to try to avoid this.',
+    'variety_tydemans_late_orange.png'
     );
     
 END//
@@ -491,10 +519,6 @@ BEGIN
     -- ORCHARD
 	INSERT INTO orchard (
 	orchard_name,
-	owner_first_name, 
-	owner_last_name,
-	email_address,
-	phone_number,
 	address_line_1,
 	address_line_2,
 	region,
@@ -506,10 +530,6 @@ BEGIN
     variety_name)
 	VALUES(
 	'Windsong Orchard',
-	'Callum',
-	'McFadgen',
-	'Callum-McFadgen@live.nmit.ac.nz',
-	'0210471998',
     '29 Inkerman Street',
     'Renwick',
     'Marlborough',
@@ -517,16 +537,12 @@ BEGIN
     '7204',
     'Well established orchard specializing in heritage apples.',
     '47859736489457',
-    'Kal',
+    'Col',
     'Blenheim Orange');
 
 
 	INSERT INTO orchard (
 	orchard_name,
-	owner_first_name, 
-	owner_last_name,
-	email_address,
-	phone_number,
 	address_line_1,
 	address_line_2,
 	region,
@@ -538,10 +554,6 @@ BEGIN
     variety_name)
 	VALUES(
 	'Mountainview Orchard',
-	'Fitz',
-	'Jouannin',
-	'fjouannin1y@issuu.com',
-	'294876052445',
     '75 Lakeland Plaza',
     'Ngatimoti',
     'Tasman',
@@ -554,10 +566,6 @@ BEGIN
 
 	INSERT INTO orchard (
 	orchard_name,
-	owner_first_name, 
-	owner_last_name,
-	email_address,
-	phone_number,
 	address_line_1,
 	address_line_2,
 	region,
@@ -569,10 +577,6 @@ BEGIN
     variety_name)
 	VALUES(
 	'Bushlands Orchard',
-	'Walt',
-	'Laughren',
-    'wlaughrenkx@discovery.com',
-    '294876052445',
     '161 Dottie Pass',
     'Wakefield',
     'Tasman',
@@ -585,10 +589,6 @@ BEGIN
 
 	INSERT INTO orchard (
 	orchard_name,
-	owner_first_name, 
-	owner_last_name,
-	email_address,
-	phone_number,
 	address_line_1,
 	address_line_2,
 	region,
@@ -600,10 +600,6 @@ BEGIN
     variety_name)
 	VALUES(
 	'Soames Orchard',
-	'Mychal',
-	'Soame',
-	'msoame1o@house.gov',
-	'28373656398',
     '472 Loomis Way',
     'Rewaka',
     'Tasman',
@@ -639,7 +635,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A box of sun ripened heritage apples',
+	'Box of heritage apples',
     '5',
     '2020-05-03 16:00:00',
     '2020-05-10 16:00:00',
@@ -668,13 +664,13 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'Perfect for lunches',
+	'Perfect for on the go',
     '1',
     '2020-05-01 16:30:00',
     '2020-05-08 16:30:00',
     'Stop in and grab your bag of apples for the week from our orchard in Brightwater.',
     3.00,
-    true,
+    false,
     3.00,
     false,
     0.00,
@@ -697,7 +693,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'Delicious handpicked eating apples',
+	'Hand picked goodness',
     '3',
     '2020-05-07 17:00:00',
     '2020-05-014 17:00:00',
@@ -726,7 +722,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A bag of excellent cooking apples',
+	'Excellent for cooking',
     '3',
     '2020-05-10 13:00:00',
     '2020-05-17 13:00:00',
@@ -755,7 +751,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A substantial bag of delicious cooking apples',
+	'A substantial bag',
     '5',
     '2020-05-05 15:00:00',
     '2020-05-12 15:00:00',
@@ -784,7 +780,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A large create of delicious cooking apples',
+	'Create of cooking apples',
     '15',
     '2020-05-05 11:00:00',
     '2020-05-12 11:00:00',
@@ -813,7 +809,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A family bag of amazing heritage eating apples',
+	'Amazing heritage apples',
     '5',
     '2020-05-10 18:00:00',
     '2020-05-17 18:00:00',
@@ -825,7 +821,7 @@ BEGIN
 	2.00,
     false,
     'Blenheim Orange',
-    'Kal');
+    'Col');
 	
 	INSERT INTO auction (
 	title,
@@ -842,7 +838,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A family bag of amazing heritage eating apples',
+	'A family bag',
     '5',
     '2020-05-17 18:00:00',
     '2020-05-14 18:00:00',
@@ -854,7 +850,7 @@ BEGIN
 	2.00,
     false,
     'Blenheim Orange',
-    'Kal');
+    'Col');
 	
 	INSERT INTO auction (
 	title,
@@ -871,7 +867,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'Get your weeks lunches of a heritage apples',
+	'Get your weeks lunches sorted',
     '3',
     '2020-05-04 12:30:00',
     '2020-05-11 12:30:00',
@@ -883,7 +879,7 @@ BEGIN
 	0.00,
     false,
     'Blenheim Orange',
-    'Kal');
+    'Col');
 	
 	INSERT INTO auction (
 	title,
@@ -900,7 +896,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'Get your weeks lunches of a heritage apples',
+	'Get your heritage apples',
     '3',
     '2020-05-04 12:30:00',
     '2020-05-11 12:30:00',
@@ -912,7 +908,7 @@ BEGIN
 	3.00,
     false,
     'Blenheim Orange',
-    'Kal');
+    'Col');
 	
 	INSERT INTO auction (
 	title,
@@ -929,7 +925,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A large family sized bag of red apples',
+	'A bag of red apples',
     '5',
     '2020-05-18 18:30:00',
     '2020-05-25 18:30:00',
@@ -958,7 +954,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A bag of beautiful red apples',
+	'Beautiful red apples',
     '3',
     '2020-05-08 12:30:00',
     '2020-05-15 12:30:00',
@@ -987,7 +983,7 @@ BEGIN
     variety_name,
 	user_name)
 	VALUES(
-	'A small bag of beautiful red apples',
+	'A small bag of apples',
     '1',
     '2020-05-08 12:30:00',
     '2020-05-15 12:30:00',
@@ -1120,11 +1116,11 @@ START TRANSACTION;
     IF
 		@lc_credential_match = 1 
 		THEN
-		SELECT 'LOGIN SUCCEDED' AS MESSAGE;
+		SELECT 'success' AS MESSAGE;
 	ELSEIF
 		@lc_credential_match = 0
 		THEN
-		SELECT 'LOGIN FAILED' AS MESSAGE;
+		SELECT 'fail' AS MESSAGE;
 	END IF;
 		
 COMMIT;
@@ -1133,48 +1129,34 @@ DELIMITER ;
 
 -- CALL UserLogin("username", "password");
 
-
-
-
-
-
-
-
-
-
-
--- UPDATE A USER NAME (TEST PROCEDURE)
-DROP PROCEDURE IF EXISTS UpdateFirstName;
+									
+-- USERNAME CHECK PROCEDURE --
+DROP PROCEDURE IF EXISTS UsernameCheck;
 DELIMITER //
-CREATE PROCEDURE UpdateFirstName(pr_username varchar(50), pr_firstname varchar(50))
-BEGIN   
+CREATE PROCEDURE UsernameCheck(pr_username varchar(50))
+BEGIN
 START TRANSACTION;
-
-		UPDATE `user`
-        SET first_name = pr_firstname
-        WHERE 
-			user_name = pr_username;
-        SELECT 'Name changed' AS MESSAGE;
+	
+	SELECT COUNT(*)
+    FROM `user`
+    WHERE
+		user_name = pr_username
+    INTO @lc_user_match;
     
-COMMIT;   
+    IF
+		@lc_user_match = 1 
+		THEN
+		SELECT 'UNAVAILABLE' AS MESSAGE;
+	ELSEIF
+		@lc_user_match = 0
+		THEN
+		SELECT 'AVAILABLE' AS MESSAGE;
+	END IF;
+		
+COMMIT;
 END//
 DELIMITER ;
--- CALL UpdateFirstName("Kal", "Callum"); 
 
+-- CALL UsernameCheck("Col");
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+									     
