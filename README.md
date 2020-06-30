@@ -1,7 +1,7 @@
 # WEB701 Milestone 3 Express.js REST API service
 
 ### Overview
-This application is an Express.js REST API service that is accessing a MySQL database and is intended to be used in conjunction with the front-end Vue web application in a Multi-Tier Client Server model.
+This application is an Express.js REST API service that is accessing a MySQL database and is intended to be used in conjunction with the front-end Vue web application to run the Got Apples! web application in the Multi-Tier Client Server model.
 <br />
 <br />
 Click here to view the video walkthrough
