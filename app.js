@@ -369,26 +369,6 @@ app.post('/post_watch/:username/:auctionnumber/:date',(req, res) => {
 
 // PATCH ROUTES ///////////////////////////////////////
 
-// PATCH AN EXISTING USER WITH AN NAME UPDATE // EXAMPLE ROUTE - http://localhost:3333/patch_user/Bobby
-app.patch('/patch_user/:username',(req, res) => { 
-
-    const userName = req.params.username
-    const firstName = "Burger"
-    const lastName = "Master"
-
-    const queryString = "UPDATE user SET first_name =?, last_name =? WHERE user_name =?"
-    MySQLConnection().query(queryString, [firstName, lastName, userName], (err, results, fields) => {
-        if (err) {
-            console.log("Patch user " + userName + " failed: " + err)
-            res.sendStatus(500)
-            return
-        };
-        console.log("Patch user succeded: user " + userName + " updated")
-        res.end()
-    });
-});
-
-
 // PATCH AN EXISTING USER // EXAMPLE ROUTE - http://localhost:3333/patch_user/
 app.patch('/patch_user/:first_name/:last_name/:email_address/:phone_number/:address_line_1/:address_line_2/:region/:city/:zip_code/:user_name',(req, res) => { 
 
@@ -467,7 +447,24 @@ app.delete('/delete_user/:username', (req, res) => {
 //     });
 // });
 
+// PATCH AN EXISTING USER WITH AN NAME UPDATE // EXAMPLE ROUTE - http://localhost:3333/patch_user/Bobby
+// app.patch('/patch_user/:username',(req, res) => { 
 
+//     const userName = req.params.username
+//     const firstName = "Burger"
+//     const lastName = "Master"
+
+//     const queryString = "UPDATE user SET first_name =?, last_name =? WHERE user_name =?"
+//     MySQLConnection().query(queryString, [firstName, lastName, userName], (err, results, fields) => {
+//         if (err) {
+//             console.log("Patch user " + userName + " failed: " + err)
+//             res.sendStatus(500)
+//             return
+//         };
+//         console.log("Patch user succeded: user " + userName + " updated")
+//         res.end()
+//     });
+// });
 
 
 
