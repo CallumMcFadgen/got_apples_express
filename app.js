@@ -41,6 +41,7 @@ app.get("/", (req, res) => {
 });
 
 
+
 // REST API ROUTES //////////////////////////////////////////////////////////////////
 
 // GET ROUTES///////////////////////////////////////
@@ -415,6 +416,8 @@ app.patch('/patch_user/:first_name/:last_name/:email_address/:phone_number/:addr
 });
 
 
+// PATCH ROUTES ///////////////////////////////////////
+
 // DELETE A SPECIFIC USER FROM THE USER TABLE BY USERNAME  // EXAMPLE - http://localhost:3333/delete_user/Bobby
 app.delete('/delete_user/:username', (req, res) => {
 
@@ -431,9 +434,6 @@ app.delete('/delete_user/:username', (req, res) => {
         res.end()
     });
 });
-
-
-// TO DO - BID ROUTE FOR CREATING/UPDATING A BID USING A MYSQL PROCEDURE
 
 
 // TESTING ////////////////////////////////////////////////////////////////////////////////////////////
