@@ -5,7 +5,7 @@ This application is an Express.js REST API service that is accessing a MySQL dat
 <br />
 <br />
 Click here to view the video walkthrough
-Link here
+https://youtu.be/RVPP8Ge8vRI
 <br />
 <br />
 <b>Note -</b> This API service needs to be installed and running before running the Vue web application, as the web application needs to be able to send requests to the APIs in this API service.
