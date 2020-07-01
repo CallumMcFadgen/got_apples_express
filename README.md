@@ -68,4 +68,4 @@ http://localhost:3333/get_users
 Now that the application is running as expected, the next step is to open the Vue web application to use some of these APIs in a Client application.
 <br />
 <br />
-If there are any issues with installing or running the Expres.js service, please do not hesitate to contact me at Callum-McFadgen@live.nmit.ac.nz
+If there are any issues with installing or running the Express.js service, please do not hesitate to contact me at Callum-McFadgen@live.nmit.ac.nz
