@@ -1120,11 +1120,11 @@ START TRANSACTION;
     IF
 		@lc_credential_match = 1 
 		THEN
-		SELECT 'LOGIN SUCCEDED' AS MESSAGE;
+		SELECT 'success' AS MESSAGE;
 	ELSEIF
 		@lc_credential_match = 0
 		THEN
-		SELECT 'LOGIN FAILED' AS MESSAGE;
+		SELECT 'fail' AS MESSAGE;
 	END IF;
 		
 COMMIT;
@@ -1133,48 +1133,34 @@ DELIMITER ;
 
 -- CALL UserLogin("username", "password");
 
-
-
-
-
-
-
-
-
-
-
--- UPDATE A USER NAME (TEST PROCEDURE)
-DROP PROCEDURE IF EXISTS UpdateFirstName;
+									
+-- USERNAME CHECK PROCEDURE --
+DROP PROCEDURE IF EXISTS UsernameCheck;
 DELIMITER //
-CREATE PROCEDURE UpdateFirstName(pr_username varchar(50), pr_firstname varchar(50))
-BEGIN   
+CREATE PROCEDURE UsernameCheck(pr_username varchar(50))
+BEGIN
 START TRANSACTION;
-
-		UPDATE `user`
-        SET first_name = pr_firstname
-        WHERE 
-			user_name = pr_username;
-        SELECT 'Name changed' AS MESSAGE;
+	
+	SELECT COUNT(*)
+    FROM `user`
+    WHERE
+		user_name = pr_username
+    INTO @lc_user_match;
     
-COMMIT;   
+    IF
+		@lc_user_match = 1 
+		THEN
+		SELECT 'UNAVAILABLE' AS MESSAGE;
+	ELSEIF
+		@lc_user_match = 0
+		THEN
+		SELECT 'AVAILABLE' AS MESSAGE;
+	END IF;
+		
+COMMIT;
 END//
 DELIMITER ;
--- CALL UpdateFirstName("Kal", "Callum"); 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- CALL UsernameCheck("Col");
 
 
